@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KaamSetu Recruiter Portal</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Segoe UI",sans-serif;
+    }
+
+    body{
+      background:#f4f8ff;
+      color:#222;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    /* NAVBAR */
+    
+
+    nav{
+      width:100%;
+      padding:18px 8%;
+      background:#111827;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+
+    .logo{
+      color:white;
+      font-size:30px;
+      font-weight:bold;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:25px;
+    }
+
+    .nav-links a{ 
+      color:#f3f4f6;
+      transition:0.3s;
+      font-size:15px;
+    }
+
+    .nav-links a:hover{
+      color:#60a5fa;
+    }
+
+    .home-btn{
+      background:#2563eb;
+      color:white;
+      padding:10px 18px;
+      border-radius:10px;
+      font-size:14px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .home-btn:hover{
+      background:#1d4ed8;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:90vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+      url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px 20px;
+      color:white;
+    }
+
+    .hero-content{
+      max-width:850px;
+      animation:fadeIn 1s ease;
+    }
+
+    .hero h1{
+      font-size:58px;
+      margin-bottom:20px;
+      line-height:1.2;
+    }
+
+    .hero p{
+      font-size:20px;
+      color:#e5e7eb;
+      margin-bottom:35px;
+      line-height:1.7;
+    }
+
+    .hero-btn{
+      display:inline-block;
+      background:#2563eb;
+      color:white;
+      padding:14px 28px;
+      border-radius:14px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .hero-btn:hover{
+      background:#1d4ed8;
+      transform:translateY(-3px);
+    }
+
+    /* MAIN LAYOUT */
+
+    .container{
+      max-width:1250px;
+      margin:auto;
+      padding:80px 6%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .section-title h2{
+      font-size:42px;
+      color:#1e3a8a;
+      margin-bottom:10px;
+    }
+
+    .section-title p{
+      color:#666;
+      font-size:17px;
+    }
+
+    /* RECRUITER FORM */
+
+    .recruiter-grid{
+      display:grid;
+      grid-template-columns:380px 1fr;
+      gap:30px;
+    }
+
+    .recruiter-form{
+      background:white;
+      padding:30px;
+      border-radius:24px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      height:fit-content;
+    }
+
+    .recruiter-form h3{
+      margin-bottom:25px;
+      color:#1e3a8a;
+      font-size:28px;
+    }
+
+    .form-group{
+      margin-bottom:18px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:600;
+      font-size:14px;
+    }
+
+    input,
+    select,
+    textarea{
+      width:100%;
+      padding:13px;
+      border:1px solid #d1d5db;
+      border-radius:12px;
+      font-size:15px;
+      transition:0.3s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus{
+      outline:none;
+      border-color:#2563eb;
+      box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+    }
+
+    textarea{
+      resize:none;
+      min-height:120px;
+    }
+
+    .submit-btn{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:14px;
+      background:#10b981;
+      color:white;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .submit-btn:hover{
+      background:#059669;
+      transform:translateY(-2px);
+    }
+
+    /* CANDIDATE CARDS */
+
+    .candidate-section{
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    .candidate-card{
+      background:white;
+      padding:24px;
+      border-radius:24px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      transition:0.4s;
+      border-left:6px solid #2563eb;
+    }
+
+    .candidate-card:hover{
+      transform:translateY(-6px);
+    }
+
+    .candidate-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .candidate-name{
+      font-size:24px;
+      font-weight:bold;
+      color:#111827;
+    }
+
+    .availability{
+      background:#dcfce7;
+      color:#166534;
+      padding:7px 14px;
+      border-radius:30px;
+      font-size:14px;
+      font-weight:bold;
+    }
+
+    .candidate-role{
+      margin-top:8px;
+      color:#4b5563;
+      font-size:16px;
+    }
+
+    .candidate-details{
+      margin-top:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .detail{
+      background:#eff6ff;
+      color:#1d4ed8;
+      padding:8px 14px;
+      border-radius:30px;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .candidate-description{
+      margin-top:18px;
+      color:#555;
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .card-buttons{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .card-btn{
+      border:none;
+      padding:11px 18px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .contact-btn{
+      background:#2563eb;
+      color:white;
+    }
+
+    .contact-btn:hover{
+      background:#1d4ed8;
+    }
+
+    .shortlist-btn{
+      background:#f59e0b;
+      color:white;
+    }
+
+    .shortlist-btn:hover{
+      background:#d97706;
+    }
+
+    /* STATS */
+
+    .stats{
+      margin-top:90px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+    }
+
+    .stat-card{
+      background:white;
+      padding:35px;
+      border-radius:24px;
+      text-align:center;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      transition:0.4s;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-6px);
+    }
+
+    .stat-number{
+      font-size:42px;
+      font-weight:bold;
+      color:#2563eb;
+      margin-bottom:10px;
+    }
+
+    .stat-text{
+      color:#555;
+      font-size:16px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      margin-top:80px;
+      background:#111827;
+      color:#d1d5db;
+      text-align:center;
+      padding:28px;
+      font-size:15px;
+    }
+
+    /* ANIMATION */
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(25px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:980px){
+
+      .recruiter-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:44px;
+      }
+
+    }
+
+    @media(max-width:700px){
+
+      nav{
+        padding:16px 5%;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+
+      .hero p{
+        font-size:17px;
+      }
+
+      .section-title h2{
+        font-size:32px;
+      }
+
+      .candidate-name{
+        font-size:20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">
+      KaamSetu Recruiter
+    </div>
+
+    <div class="nav-links">
+      <a href="#">Dashboard</a>
+      <a href="#">Workers</a>
+      <a href="#">Post Jobs</a>
+      <a href="#">Contact</a>
+      <a href="landing.html" class="home-btn">Back to Home</a>
+    </div>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Hire Trusted Workers Faster & Smarter
+      </h1>
+
+      <p>
+        Connect with drivers, security guards, delivery executives,
+        helpers, maids, caretakers, and more through a simple and reliable hiring platform.
+      </p>
+
+      <a href="#recruiter-panel" class="hero-btn">
+        Start Hiring
+      </a>
+
+    </div>
+
+  </section>
+
+  <!-- MAIN CONTENT -->
+
+  <div class="container" id="recruiter-panel">
+
+    <div class="section-title">
+
+      <h2>
+        Recruiter Dashboard
+      </h2>
+
+      <p>
+        Post jobs and discover workers based on skills, experience, and location.
+      </p>
+
+    </div>
+
+    <div class="recruiter-grid">
+
+      <!-- LEFT FORM -->
+
+      <div class="recruiter-form">
+
+        <h3>
+          Post a New Job
+        </h3>
+
+        <div class="form-group">
+          <label>Company Name</label>
+
+          <input 
+            type="text"
+            placeholder="Enter company or organization name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Job Role</label>
+
+          <select>
+            <option>Select Job Role</option>
+            <option>Security Guard</option>
+            <option>Driver</option>
+            <option>Delivery Executive</option>
+            <option>House Maid</option>
+            <option>Cleaner</option>
+            <option>Helper</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Job Location</label>
+
+          <input 
+            type="text"
+            placeholder="Example: Delhi, Noida, Gurgaon"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Salary Offered</label>
+
+          <input 
+            type="text"
+            placeholder="Example: ₹18,000 per month"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Job Type</label>
+
+          <select>
+            <option>Select Job Type</option>
+            <option>Full Time</option>
+            <option>Part Time</option>
+            <option>Night Shift</option>
+            <option>Daily Wage</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Job Description</label>
+
+          <textarea placeholder="Write job requirements and responsibilities"></textarea>
+        </div>
+
+        <button class="submit-btn">
+          Post Job Opportunity
+        </button>
+
+      </div>
+
+      <!-- RIGHT CANDIDATES -->
+
+      <div class="candidate-section">
+
+        <!-- CARD -->
+
+        <div class="candidate-card">
+
+          <div class="candidate-header">
+
+            <div>
+              <div class="candidate-name">
+                Ramesh Kumar
+              </div>
+
+              <div class="candidate-role">
+                Security Guard • Delhi
+              </div>
+            </div>
+
+            <div class="availability">
+              Available Immediately
+            </div>
+
+          </div>
+
+          <div class="candidate-details">
+            <div class="detail">3 Years Experience</div>
+            <div class="detail">Night Shift</div>
+            <div class="detail">Verified ID</div>
+          </div>
+
+          <div class="candidate-description">
+            Experienced security guard with residential and mall security background.
+            Skilled in visitor management and emergency response.
+          </div>
+
+          <div class="card-buttons">
+            <button class="card-btn contact-btn">
+              Contact Worker
+            </button>
+
+            <button class="card-btn shortlist-btn">
+              Shortlist
+            </button>
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="candidate-card">
+
+          <div class="candidate-header">
+
+            <div>
+              <div class="candidate-name">
+                Sunita Sharma
+              </div>
+
+              <div class="candidate-role">
+                House Maid • Gurgaon
+              </div>
+            </div>
+
+            <div class="availability">
+              Available This Week
+            </div>
+
+          </div>
+
+          <div class="candidate-details">
+            <div class="detail">Cooking Skills</div>
+            <div class="detail">2 Years Experience</div>
+            <div class="detail">Part Time</div>
+          </div>
+
+          <div class="candidate-description">
+            Experienced in household cleaning, kitchen assistance,
+            and child care support for families.
+          </div>
+
+          <div class="card-buttons">
+            <button class="card-btn contact-btn">
+              Contact Worker
+            </button>
+
+            <button class="card-btn shortlist-btn">
+              Shortlist
+            </button>
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+
+        <div class="candidate-card">
+
+          <div class="candidate-header">
+
+            <div>
+              <div class="candidate-name">
+                Imran Ali
+              </div>
+
+              <div class="candidate-role">
+                Delivery Executive • Noida
+              </div>
+            </div>
+
+            <div class="availability">
+              Flexible Timing
+            </div>
+
+          </div>
+
+          <div class="candidate-details">
+            <div class="detail">Bike Available</div>
+            <div class="detail">1 Year Experience</div>
+            <div class="detail">Verified License</div>
+          </div>
+
+          <div class="candidate-description">
+            Fast and reliable delivery worker with experience
+            in parcel and food delivery services.
+          </div>
+
+          <div class="card-buttons">
+            <button class="card-btn contact-btn">
+              Contact Worker
+            </button>
+
+            <button class="card-btn shortlist-btn">
+              Shortlist
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+      <div class="stat-card">
+        <div class="stat-number">10K+</div>
+
+        <div class="stat-text">
+          Registered Workers
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number">2K+</div>
+
+        <div class="stat-text">
+          Recruiters Hiring
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number">15K+</div>
+
+        <div class="stat-text">
+          Jobs Posted
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-number">95%</div>
+
+        <div class="stat-text">
+          Hiring Satisfaction
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 KaamSetu Recruiter Portal • Connecting Employers With Trusted Workers
+  </footer>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    // POST JOB BUTTON
+
+    const submitBtn = document.querySelector('.submit-btn');
+
+    submitBtn.addEventListener('click', () => {
+
+      alert(
+        "Job posted successfully! Workers matching your requirements will be notified."
+      );
+
+    });
+
+    // CONTACT BUTTONS
+
+    const contactButtons = document.querySelectorAll('.contact-btn');
+
+    contactButtons.forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        alert(
+          "Worker contact request sent successfully."
+        );
+
+      });
+
+    });
+
+    // SHORTLIST BUTTONS
+
+    const shortlistButtons = document.querySelectorAll('.shortlist-btn');
+
+    shortlistButtons.forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        button.innerText = "Shortlisted ✓";
+        button.style.background = "#059669";
+
+      });
+
+    });
+
+  </script>
+
+</body>
+</html>
