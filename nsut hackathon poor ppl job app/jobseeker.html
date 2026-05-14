@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KaamSetu Job Seeker Portal</title>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:"Segoe UI",sans-serif;
+    }
+
+    body{
+      background:#f4f8ff;
+      color:#222;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      padding:18px 8%;
+      background:#111827;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+
+    .logo{
+      color:white;
+      font-size:30px;
+      font-weight:bold;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:25px;
+      align-items:center;
+    }
+
+    .nav-links a{
+      color:#f3f4f6;
+      transition:0.3s;
+      font-size:15px;
+    }
+
+    .nav-links a:hover{
+      color:#60a5fa;
+    }
+
+    .home-btn{
+      background:#2563eb;
+      padding:10px 18px;
+      border-radius:10px;
+      font-weight:bold;
+    }
+
+    .home-btn:hover{
+      background:#1d4ed8;
+      color:white !important;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:90vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+      url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:40px 20px;
+      color:white;
+    }
+
+    .hero-content{
+      max-width:850px;
+      animation:fadeIn 1s ease;
+    }
+
+    .hero h1{
+      font-size:58px;
+      margin-bottom:20px;
+      line-height:1.2;
+    }
+
+    .hero p{
+      font-size:20px;
+      color:#e5e7eb;
+      margin-bottom:35px;
+      line-height:1.7;
+    }
+
+    .hero-btn{
+      display:inline-block;
+      background:#10b981;
+      color:white;
+      padding:14px 28px;
+      border-radius:14px;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .hero-btn:hover{
+      background:#059669;
+      transform:translateY(-3px);
+    }
+
+    /* MAIN */
+
+    .container{
+      max-width:1250px;
+      margin:auto;
+      padding:80px 6%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
+    }
+
+    .section-title h2{
+      font-size:42px;
+      color:#1e3a8a;
+      margin-bottom:10px;
+    }
+
+    .section-title p{
+      color:#666;
+      font-size:17px;
+    }
+
+    /* GRID */
+
+    .job-grid{
+      display:grid;
+      grid-template-columns:380px 1fr;
+      gap:30px;
+    }
+
+    /* PROFILE FORM */
+
+    .profile-form{
+      background:white;
+      padding:30px;
+      border-radius:24px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      height:fit-content;
+    }
+
+    .profile-form h3{
+      margin-bottom:25px;
+      color:#1e3a8a;
+      font-size:28px;
+    }
+
+    .form-group{
+      margin-bottom:18px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:8px;
+      font-weight:600;
+      font-size:14px;
+    }
+
+    input,
+    select,
+    textarea{
+      width:100%;
+      padding:13px;
+      border:1px solid #d1d5db;
+      border-radius:12px;
+      font-size:15px;
+      transition:0.3s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus{
+      outline:none;
+      border-color:#2563eb;
+      box-shadow:0 0 0 3px rgba(37,99,235,0.15);
+    }
+
+    .upload-box{
+      border:2px dashed #60a5fa;
+      background:#eff6ff;
+      padding:20px;
+      border-radius:16px;
+      text-align:center;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .upload-box:hover{
+      background:#dbeafe;
+    }
+
+    .upload-box input{
+      margin-top:10px;
+      border:none;
+      background:none;
+    }
+
+    .submit-btn{
+      width:100%;
+      padding:15px;
+      border:none;
+      border-radius:14px;
+      background:#2563eb;
+      color:white;
+      font-size:16px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .submit-btn:hover{
+      background:#1d4ed8;
+      transform:translateY(-2px);
+    }
+
+    /* JOB LIST */
+
+    .job-section{
+      display:flex;
+      flex-direction:column;
+      gap:22px;
+    }
+
+    .search-bar{
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+      background:white;
+      padding:18px;
+      border-radius:20px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .search-bar input{
+      flex:1;
+      min-width:200px;
+    }
+
+    .search-btn{
+      background:#10b981;
+      color:white;
+      border:none;
+      padding:13px 22px;
+      border-radius:12px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .search-btn:hover{
+      background:#059669;
+    }
+
+    /* JOB CARDS */
+
+    .job-card{
+      background:white;
+      padding:24px;
+      border-radius:24px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      transition:0.4s;
+      border-left:6px solid #2563eb;
+    }
+
+    .job-card:hover{
+      transform:translateY(-6px);
+    }
+
+    .job-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .job-title{
+      font-size:24px;
+      font-weight:bold;
+      color:#111827;
+    }
+
+    .company{
+      margin-top:8px;
+      color:#4b5563;
+      font-size:16px;
+    }
+
+    .salary{
+      background:#dcfce7;
+      color:#166534;
+      padding:8px 16px;
+      border-radius:30px;
+      font-size:14px;
+      font-weight:bold;
+    }
+
+    .job-details{
+      margin-top:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .detail{
+      background:#eff6ff;
+      color:#1d4ed8;
+      padding:8px 14px;
+      border-radius:30px;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .job-description{
+      margin-top:18px;
+      color:#555;
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .card-buttons{
+      margin-top:22px;
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .apply-btn{
+      border:none;
+      padding:11px 18px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:bold;
+      transition:0.3s;
+      background:#2563eb;
+      color:white;
+    }
+
+    .apply-btn:hover{
+      background:#1d4ed8;
+    }
+
+   
+
+    /* STATS */
+
+    .stats{
+      margin-top:90px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+    }
+
+    .stat-card{
+      background:white;
+      padding:35px;
+      border-radius:24px;
+      text-align:center;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+      transition:0.4s;
+    }
+
+    .stat-card:hover{
+      transform:translateY(-6px);
+    }
+
+    .stat-number{
+      font-size:42px;
+      font-weight:bold;
+      color:#2563eb;
+      margin-bottom:10px;
+    }
+
+    .stat-text{
+      color:#555;
+      font-size:16px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      margin-top:80px;
+      background:#111827;
+      color:#d1d5db;
+      text-align:center;
+      padding:28px;
+      font-size:15px;
+    }
+
+    /* ANIMATION */
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(25px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:980px){
+
+      .job-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:44px;
+      }
+
+    }
+
+    @media(max-width:700px){
+
+      nav{
+        padding:16px 5%;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+
+      .hero p{
+        font-size:17px;
+      }
+
+      .section-title h2{
+        font-size:32px;
+      }
+
+      .job-title{
+        font-size:20px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+
+    <div class="logo">
+      KaamSetu Jobs
+    </div>
+
+    <div class="nav-links">
+      <a href="#">Jobs</a>
+      <a href="#">Applications</a>
+      <a href="landing.html" class="home-btn">Home</a>
+    </div>
+
+  </nav>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Find Trusted Jobs Near You
+      </h1>
+
+      <p>
+        Discover opportunities for drivers, security guards,
+        delivery executives, maids, helpers, and more.
+      </p>
+
+      <a href="#jobs-panel" class="hero-btn">
+        Explore Jobs
+      </a>
+      
+
+    </div>
+
+  </section>
+
+  <!-- MAIN -->
+  <div class="container" id="jobs-panel"> 
+   
+
+  <div class="container" id="jobs-panel">
+
+    <div class="section-title">
+
+      <h2>
+        Job Seeker Dashboard
+      </h2>
+
+      <p>
+        Upload your details and find jobs matching your skills and location.
+      </p>
+
+    </div>
+
+    <div class="job-grid">
+
+      <!-- LEFT FORM -->
+
+      <div class="profile-form">
+
+        <h3>
+          Job Preferences
+        </h3>
+       
+
+        <div class="form-group">
+          <label>Work Category</label>
+
+          <select id="categoryFilter">
+            <option>Select Work Type</option>
+            <option>Security Guard</option>
+            <option>Driver</option>
+            <option>Delivery Executive</option>
+            <option>House Maid</option>
+            <option>Cleaner</option>
+            <option>Helper</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Location</label>
+
+          <select id="locationFilter">
+            <option>Select Location</option>
+            <option>Delhi</option>
+            <option>Noida</option>
+            <option>Gurgaon</option>
+            <option>Ghaziabad</option>
+            <option>Lucknow</option>
+            <option>Faridabad</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Job Type</label>
+
+          <select id="typeFilter">
+            <option>Select Job Type</option>
+            <option>Full Time</option>
+            <option>Part Time</option>
+            <option>Flexible Hours</option>
+            <option>Night Shift</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Minimum Salary</label>
+
+          <input 
+            type="text"
+            id="salaryFilter"
+            placeholder="Example: ₹18,000"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Experience Level</label>
+
+          <select id="experienceFilter">
+            <option>Select Experience</option>
+            <option>Fresher</option>
+            <option>1 Year</option>
+            <option>2 Years</option>
+            <option>3+ Years</option>
+          </select>
+        </div>
+
+        <button class="submit-btn" id="filterJobsBtn">
+          Find Matching Jobs
+        </button>
+
+      </div>
+
+      <!-- RIGHT JOBS -->
+
+      <div class="job-section">
+
+        <!-- SEARCH -->
+
+        <div class="search-bar">
+
+          <input 
+            id="searchInput"
+            type="text"
+            placeholder="Search jobs like driver, guard, helper..."
+          />
+
+          <button class="search-btn" id="searchBtn">
+            Search Jobs
+          </button>
+
+        </div>
+
+        <!-- JOB CARD -->
+         <div class="job-card">
+
+  <div class="job-header">
+
+    <div>
+      <div class="job-title">
+        House Maid
+      </div>
+
+      <div class="company">
+        Sharma Family Residence • Delhi
+      </div>
+    </div>
+
+    <div class="salary">
+      ₹14,000 / month
+    </div>
+
+  </div>
+
+  <div class="job-details">
+    <div class="detail">Full Time</div>
+    <div class="detail">Food Included</div>
+    <div class="detail">1 Opening</div>
+  </div>
+
+  <div class="job-description">
+    Need experienced house maid for cleaning, cooking help, and household work.
+  </div>
+
+  <button class="apply-btn">
+    Apply Now
+  </button>
+
+</div>
+
+<!-- JOB CARD -->
+
+<div class="job-card">
+
+  <div class="job-header">
+
+    <div>
+      <div class="job-title">
+        Personal Car Driver
+      </div>
+
+      <div class="company">
+        Verma Transport Services • Gurgaon
+      </div>
+    </div>
+
+    <div class="salary">
+      ₹25,000 / month
+    </div>
+
+  </div>
+
+  <div class="job-details">
+    <div class="detail">Full Time</div>
+    <div class="detail">License Required</div>
+    <div class="detail">Day Shift</div>
+  </div>
+
+  <div class="job-description">
+    Looking for experienced car driver for family transport and office pickup duties.
+  </div>
+
+  <button class="apply-btn">
+    Apply Now
+  </button>
+
+</div>
+
+<!-- JOB CARD -->
+
+<div class="job-card">
+
+  <div class="job-header">
+
+    <div>
+      <div class="job-title">
+        Ambulance Driver
+      </div>
+
+      <div class="company">
+        CityCare Hospital • Noida
+      </div>
+    </div>
+
+    <div class="salary">
+      ₹28,000 / month
+    </div>
+
+  </div>
+
+  <div class="job-details">
+    <div class="detail">Emergency Duty</div>
+    <div class="detail">Night Shift</div>
+    <div class="detail">License Required</div>
+  </div>
+
+  <div class="job-description">
+    Ambulance drivers needed for hospital emergency transport services.
+  </div>
+
+  <button class="apply-btn">
+    Apply Now
+  </button>
+
+</div>
+
+<!-- JOB CARD -->
+
+<div class="job-card">
+
+  <div class="job-header">
+
+    <div>
+      <div class="job-title">
+        Baby Sitter
+      </div>
+
+      <div class="company">
+        Happy Homes Agency • Ghaziabad
+      </div>
+    </div>
+
+    <div class="salary">
+      ₹16,000 / month
+    </div>
+
+  </div>
+
+  <div class="job-details">
+    <div class="detail">Part Time</div>
+    <div class="detail">Female Preferred</div>
+    <div class="detail">Flexible Hours</div>
+  </div>
+
+  <div class="job-description">
+    Need caring baby sitter for child supervision and basic childcare activities.
+  </div>
+
+  <button class="apply-btn">
+    Apply Now
+  </button>
+
+</div>
+
+<!-- JOB CARD -->
+
+<div class="job-card">
+
+  <div class="job-header">
+
+    <div>
+      <div class="job-title">
+        Home Security Guard
+      </div>
+
+      <div class="company">
+        SafeHome Security Pvt Ltd • Faridabad
+      </div>
+    </div>
+
+    <div class="salary">
+      ₹19,000 / month
+    </div>
+
+  </div>
+
+  <div class="job-details">
+    <div class="detail">Night Shift</div>
+    <div class="detail">2 Openings</div>
+    <div class="detail">Full Time</div>
+  </div>
+
+  <div class="job-description">
+    Security guards required for residential societies and private homes.
+  </div>
+
+  <button class="apply-btn">
+    Apply Now
+  </button>
+
+</div>
+
+      <!-- JOB CARD -->
+
+      <div class="job-card">
+
+        <div class="job-header">
+
+          <div>
+            <div class="job-title">
+              E-Rickshaw Driver
+            </div>
+
+            <div class="company">
+              CityRide Services • Delhi
+            </div>
+          </div>
+
+          <div class="salary">
+            ₹22,000 / month
+          </div>
+
+        </div>
+
+        <div class="job-details">
+          <div class="detail">Flexible Timing</div>
+          <div class="detail">Daily Payment</div>
+          <div class="detail">Local Routes</div>
+        </div>
+
+        <div class="job-description">
+          Need e-rickshaw drivers for local passenger service. Driving license preferred.
+        </div>
+
+        <button class="apply-btn">
+          Apply Now
+        </button>
+
+      </div>
+
+      <!-- JOB CARD -->
+
+      <div class="job-card">
+
+        <div class="job-header">
+
+          <div>
+            <div class="job-title">
+              Delivery Executive
+            </div>
+
+            <div class="company">
+              FastDrop Logistics • Ghaziabad
+            </div>
+          </div>
+
+          <div class="salary">
+            ₹20,000 + Incentives
+          </div>
+
+        </div>
+
+        <div class="job-details">
+          <div class="detail">Part Time</div>
+          <div class="detail">Bike Required</div>
+          <div class="detail">Weekly Bonus</div>
+        </div>
+
+        <div class="job-description">
+          Deliver parcels and food orders in nearby areas. Flexible working hours available.
+        </div>
+
+        <button class="apply-btn">
+          Apply Now
+        </button>
+
+      </div>
+
+    </section>
+
+  
+
+        <div class="job-card">
+
+          <div class="job-header">
+
+            <div>
+
+              <div class="job-title">
+                Security Guard
+              </div>
+
+              <div class="company">
+                ABC Security Pvt Ltd • Delhi
+              </div>
+
+            </div>
+
+            <div class="salary">
+              ₹18,000 / month
+            </div>
+
+          </div>
+
+          <div class="job-details">
+            <div class="detail">Full Time</div>
+            <div class="detail">Night Shift</div>
+            <div class="detail">2 Openings</div>
+          </div>
+
+          <div class="job-description">
+            Looking for security guards for malls and residential societies.
+            Uniform and accommodation available.
+          </div>
+
+          <div class="card-buttons">
+
+            <button class="apply-btn">
+              Apply Now
+            </button>
+
+           
+          </div>
+
+        </div>
+
+        <!-- JOB CARD -->
+
+        <div class="job-card">
+
+          <div class="job-header">
+
+            <div>
+
+              <div class="job-title">
+                Delivery Executive
+              </div>
+
+              <div class="company">
+                FastDrop Logistics • Noida
+              </div>
+
+            </div>
+
+            <div class="salary">
+              ₹22,000 + Incentives
+            </div>
+
+          </div>
+
+          <div class="job-details">
+            <div class="detail">Flexible Hours</div>
+            <div class="detail">Bike Required</div>
+            <div class="detail">Weekly Bonus</div>
+          </div>
+
+          <div class="job-description">
+            Need delivery executives for food and parcel delivery services.
+            Immediate joining available.
+          </div>
+
+          <div class="card-buttons">
+
+            <button class="apply-btn">
+              Apply Now
+            </button>
+
+            
+
+          </div>
+
+        </div>
+
+        <!-- JOB CARD -->
+
+        <div class="job-card">
+
+          <div class="job-header">
+
+            <div>
+
+              <div class="job-title">
+                Personal Driver
+              </div>
+
+              <div class="company">
+                Sharma Family • Gurgaon
+              </div>
+
+            </div>
+
+            <div class="salary">
+              ₹25,000 / month
+            </div>
+
+          </div>
+
+          <div class="job-details">
+            <div class="detail">License Required</div>
+            <div class="detail">Full Time</div>
+            <div class="detail">Day Shift</div>
+          </div>
+
+          <div class="job-description">
+            Looking for experienced personal driver for daily office
+            and family transportation.
+          </div>
+
+          <div class="card-buttons">
+
+            <button class="apply-btn">
+              Apply Now
+            
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+      <div class="stat-card">
+
+        <div class="stat-number">
+          15K+
+        </div>
+
+        <div class="stat-text">
+          Active Jobs
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-number">
+          10K+
+        </div>
+
+        <div class="stat-text">
+          Workers Hired
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-number">
+          2K+
+        </div>
+
+        <div class="stat-text">
+          Recruiters
+        </div>
+
+      </div>
+
+      <div class="stat-card">
+
+        <div class="stat-number">
+          95%
+        </div>
+
+        <div class="stat-text">
+          Satisfaction Rate
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 KaamSetu Job Portal • Helping Workers Find Better Opportunities
+  </footer>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+
+    // FILTER JOBS BY PREFERENCES
+
+    const filterBtn = document.getElementById('filterJobsBtn');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const locationFilter = document.getElementById('locationFilter');
+    const typeFilter = document.getElementById('typeFilter');
+    const salaryFilter = document.getElementById('salaryFilter');
+    const experienceFilter = document.getElementById('experienceFilter');
+    const jobCards = Array.from(document.querySelectorAll('.job-card'));
+
+    filterBtn.addEventListener('click', () => {
+
+      const category = categoryFilter.value.toLowerCase();
+      const location = locationFilter.value.toLowerCase();
+      const jobType = typeFilter.value.toLowerCase();
+      const minSalary = salaryFilter.value.trim();
+      const experience = experienceFilter.value.toLowerCase();
+
+      const matched = jobCards.filter(card => {
+        const text = card.textContent.toLowerCase();
+        let match = true;
+
+        if(category !== 'select work type'){
+          match = match && text.includes(category);
+        }
+        if(location !== 'select location'){
+          match = match && text.includes(location);
+        }
+        if(jobType !== 'select job type'){
+          match = match && text.includes(jobType);
+        }
+        if(experience !== 'select experience'){
+          match = match && text.includes(experience);
+        }
+
+        return match;
+      });
+
+      jobCards.forEach(card => {
+        card.style.display = matched.includes(card) ? '' : 'none';
+      });
+
+      const filters = [];
+      if(category !== 'select work type') filters.push('Category: ' + categoryFilter.value);
+      if(location !== 'select location') filters.push('Location: ' + locationFilter.value);
+      if(jobType !== 'select job type') filters.push('Type: ' + typeFilter.value);
+      if(experience !== 'select experience') filters.push('Experience: ' + experienceFilter.value);
+
+      const message = filters.length > 0 ? 'Matching jobs for ' + filters.join(', ') : 'Showing all available jobs.';
+      alert(message + ' Found ' + matched.length + ' job(s).');
+
+    });
+
+    // SEARCH JOBS
+
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
+
+    searchBtn.addEventListener('click', () => {
+
+      const query = searchInput.value.toLowerCase().trim();
+
+      if(!query){
+        jobCards.forEach(card => card.style.display = '');
+        alert('Showing all available jobs.');
+        return;
+      }
+
+      const matched = jobCards.filter(card => {
+        const text = card.textContent.toLowerCase();
+        return text.includes(query);
+      });
+
+      jobCards.forEach(card => {
+        card.style.display = matched.includes(card) ? '' : 'none';
+      });
+
+      alert('Found ' + matched.length + ' job(s) matching "' + searchInput.value.trim() + '"');
+
+    });
+
+    // APPLY BUTTONS
+
+    const applyButtons = document.querySelectorAll('.apply-btn');
+
+    applyButtons.forEach(button => {
+
+      button.addEventListener('click', () => {
+
+        const card = button.closest('.job-card');
+        const jobTitle = card.querySelector('.job-title').textContent.trim();
+        const company = card.querySelector('.company').textContent.trim();
+
+        alert('Applied for "' + jobTitle + '" at ' + company + '. Your application has been submitted!');
+
+      });
+
+    });
+
+   
+
+  </script>
+
+</body>
+</html>

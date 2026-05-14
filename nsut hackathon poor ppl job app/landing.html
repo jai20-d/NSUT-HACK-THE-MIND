@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KaamSetu | Connect Workers & Recruiters</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#f5f9ff;
+      color:#222;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+    }
+
+    /* NAVBAR */
+
+    nav{
+      width:100%;
+      padding:18px 8%;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      background:rgba(0,0,0,0.35);
+      backdrop-filter:blur(8px);
+    }
+
+    .logo{
+      color:white;
+      font-size:30px;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:25px;
+    }
+
+    .nav-links a{
+      color:white;
+      font-size:16px;
+      transition:0.3s;
+    }
+
+    .nav-links a:hover{
+      color:#facc15;
+    }
+
+    /* HERO SECTION */
+
+    .hero{
+      height:100vh;
+      background:
+      linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+      url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:20px;
+      color:white;
+    }
+
+    .hero-content{
+      max-width:850px;
+      animation:fadeIn 1.2s ease;
+    }
+
+    .hero h1{
+      font-size:60px;
+      margin-bottom:20px;
+      line-height:1.2;
+    }
+
+    .hero p{
+      font-size:20px;
+      margin-bottom:35px;
+      color:#f3f4f6;
+    }
+
+    /* OPTIONS */
+
+    .options{
+      display:flex;
+      justify-content:center;
+      gap:35px;
+      flex-wrap:wrap;
+      margin-top:20px;
+    }
+
+    .option-card{
+      width:300px;
+      background:rgba(255,255,255,0.12);
+      border:1px solid rgba(255,255,255,0.2);
+      backdrop-filter:blur(10px);
+      padding:35px 25px;
+      border-radius:24px;
+      transition:0.4s ease;
+      cursor:pointer;
+      box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    }
+
+    .option-card:hover{
+      transform:translateY(-10px) scale(1.02);
+      background:rgba(255,255,255,0.2);
+    }
+
+    .option-icon{
+      font-size:55px;
+      margin-bottom:20px;
+    }
+
+    .option-card h2{
+      margin-bottom:12px;
+      font-size:28px;
+    }
+
+    .option-card p{
+      font-size:15px;
+      margin-bottom:22px;
+      color:#e5e7eb;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:12px 24px;
+      border-radius:12px;
+      background:#2563eb;
+      color:white;
+      font-weight:bold;
+      transition:0.3s;
+    }
+
+    .btn:hover{
+      background:#1d4ed8;
+    }
+
+    .btn-secondary{
+      background:#10b981;
+    }
+
+    .btn-secondary:hover{
+      background:#059669;
+    }
+
+    /* ABOUT SECTION */
+
+    .about{
+      padding:90px 8%;
+      background:white;
+    }
+
+    .about-container{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      align-items:center;
+    }
+
+    .about-image{
+      background:
+      url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1200&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      min-height:450px;
+      border-radius:28px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .about-text h2{
+      font-size:42px;
+      color:#1e3a8a;
+      margin-bottom:20px;
+    }
+
+    .about-text p{
+      margin-bottom:18px;
+      color:#555;
+      font-size:17px;
+      line-height:1.8;
+    }
+
+    .highlight{
+      color:#2563eb;
+      font-weight:bold;
+    }
+
+    /* FEATURES */
+
+    .features{
+      padding:90px 8%;
+      background:#eff6ff;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:60px;
+    }
+
+    .section-title h2{
+      font-size:42px;
+      color:#1e3a8a;
+      margin-bottom:12px;
+    }
+
+    .section-title p{
+      color:#555;
+      font-size:17px;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:30px;
+    }
+
+    .feature-card{
+      background:white;
+      padding:35px 28px;
+      border-radius:24px;
+      text-align:center;
+      transition:0.4s;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .feature-card:hover{
+      transform:translateY(-8px);
+    }
+
+    .feature-card h3{
+      margin:18px 0;
+      color:#111827;
+      font-size:24px;
+    }
+
+    .feature-card p{
+      color:#666;
+      line-height:1.7;
+    }
+
+    .feature-icon{
+      font-size:52px;
+    }
+
+    /* RECRUITER SECTION */
+
+    .recruiter-section{
+      padding:90px 8%;
+      background:
+      linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+      url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      text-align:center;
+      color:white;
+    }
+
+    .recruiter-section h2{
+      font-size:45px;
+      margin-bottom:20px;
+    }
+
+    .recruiter-section p{
+      max-width:800px;
+      margin:auto;
+      margin-bottom:35px;
+      line-height:1.8;
+      color:#f3f4f6;
+      font-size:18px;
+    }
+
+    /* FOOTER */
+
+    footer{
+      background:#111827;
+      color:#d1d5db;
+      text-align:center;
+      padding:28px 20px;
+      font-size:15px;
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(30px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:950px){
+
+      .hero h1{
+        font-size:45px;
+      }
+
+      .about-container{
+        grid-template-columns:1fr;
+      }
+
+      .about-image{
+        min-height:320px;
+      }
+
+      .nav-links{
+        gap:15px;
+      }
+    }
+
+    @media(max-width:700px){
+
+      nav{
+        padding:15px 5%;
+      }
+
+      .logo{
+        font-size:24px;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+      .hero h1{
+        font-size:34px;
+      }
+
+      .hero p{
+        font-size:17px;
+      }
+
+      .option-card{
+        width:100%;
+        max-width:340px;
+      }
+
+      .about-text h2,
+      .section-title h2,
+      .recruiter-section h2{
+        font-size:32px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+
+  <nav>
+    <div class="logo">KaamSetu</div>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#recruiters">Recruiters</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Connecting Workers With Better Opportunities
+      </h1>
+
+      <p>
+        A simple and trusted platform helping job seekers and recruiters connect quickly,
+        safely, and efficiently.
+      </p>
+
+      <div class="options">
+
+        <!-- SEEKING JOB -->
+
+        <a href="jobseeker.html">
+
+          <div class="option-card">
+
+            <div class="option-icon">💼</div>
+
+            <h2>Seeking Job</h2>
+
+            <p>
+              Find jobs near you based on skills, salary, and location.
+              Easy to use for workers from all backgrounds.
+            </p>
+
+            <span class="btn">
+              Find Jobs
+            </span>
+
+          </div>
+
+        </a>
+
+       <!-- RECRUITER -->
+
+<a href="recruiter.html">
+
+  <div class="option-card">
+
+    <div class="option-icon">🏢</div>
+
+    <h2>Recruiter</h2>
+
+    <p>
+      Hire verified workers quickly for driving, security,
+      delivery, housekeeping, and more.
+    </p>
+
+    <span class="btn btn-secondary">
+      Hire Workers
+    </span>
+
+  </div>
+
+</a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT SECTION -->
+
+  <section class="about" id="about">
+
+    <div class="about-container">
+
+      <img src="C:\Users\Jai Tomar\Documents\nsut hackathon poor ppl job app\about-image.png" alt="about-image">
+
+      <div class="about-text">
+
+        <h2>
+          About KaamSetu
+        </h2>
+
+        <p>
+          <span class="highlight">KaamSetu</span> is designed to bridge the gap between
+          hardworking individuals seeking employment and recruiters searching for reliable workers.
+        </p>
+
+        <p>
+          Many workers such as drivers, security guards, delivery executives,
+          house maids, caretakers, and helpers struggle to access trustworthy digital job platforms.
+          KaamSetu simplifies the process through an intuitive and mobile-friendly experience.
+        </p>
+
+        <p>
+          Our goal is to create a platform that is accessible, transparent,
+          and easy to use for everyone — even users with limited technical experience.
+        </p>
+
+        <p>
+          Recruiters can quickly connect with verified workers, while job seekers can discover
+          nearby opportunities that match their skills, preferences, and salary expectations.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- FEATURES -->
+
+  <section class="features" id="features">
+
+    <div class="section-title">
+
+      <h2>
+        Why Choose KaamSetu?
+      </h2>
+
+      <p>
+        Built for simplicity, trust, and accessibility
+      </p>
+
+    </div>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+
+        <div class="feature-icon">📍</div>
+
+        <h3>Location Based Jobs</h3>
+
+        <p>
+          Discover opportunities near your area using smart location-based matching.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">📄</div>
+
+        <h3>Easy Document Upload</h3>
+
+        <p>
+          Upload resumes or verification documents in just a few clicks.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">⚡</div>
+
+        <h3>Fast Hiring Process</h3>
+
+        <p>
+          Recruiters and workers can connect quickly without complicated steps.
+        </p>
+
+      </div>
+
+      <div class="feature-card">
+
+        <div class="feature-icon">📱</div>
+
+        <h3>Mobile Friendly</h3>
+
+        <p>
+          Fully responsive design that works smoothly on mobile devices and desktops.
+        </p>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- RECRUITER SECTION -->
+
+  <section class="recruiter-section" id="recruiters">
+
+    <h2>
+      For Recruiters
+    </h2>
+
+    <p>
+      Recruiters can easily connect with trusted workers for security,
+      transportation, housekeeping, delivery services, caregiving, and more.
+      Post job opportunities, manage applications, and hire efficiently through
+      a streamlined platform designed for rapid recruitment.
+    </p>
+
+    <a href="#">
+      <span class="btn btn-secondary">
+        Recruiter Dashboard 
+      </span>
+    </a>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+    © 2026 KaamSetu • Connecting Talent With Opportunity
+  </footer>
+
+</body>
+</html>
